@@ -2,16 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart BMI & Health Tracker – Live Demo</title>
-  <meta name="description" content="Live demo for the Smart BMI & Health Tracker WordPress plugin. Try BMI calculator with charts, dark mode, PDF export, and health tips.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Live demo for Smart BMI & Health Tracker – Calculate BMI with charts, tips, PDF export, and dark mode."/>
+  <title>Smart BMI & Health Tracker – Demo</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="icon.png" />
+  <style>
+    .sbmi-banner {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+      border-radius: 12px;
+    }
+  </style>
 </head>
 <body>
 
- <img src="banner.png" alt="Smart BMI & Health Tracker Banner" style="max-width: 100%; height: auto; margin-bottom: 20px; border-radius: 12px;" />
+  <!-- Banner -->
+  <img src="banner.png" alt="Smart BMI & Health Tracker Banner" class="sbmi-banner" />
 
+  <!-- BMI Calculator -->
   <div id="sbmi-container" class="sbmi-wrapper">
     <h2 class="sbmi-title">Smart BMI & Health Tracker</h2>
 
@@ -47,6 +58,15 @@
     </div>
   </div>
 
+  <!-- Toggle Dark Mode -->
+  <button id="sbmi-dark-toggle" style="
+    position: fixed; top: 15px; right: 15px;
+    z-index: 9999; padding: 10px 14px;
+    background: #222; color: #fff;
+    border-radius: 20px; border: none;
+    cursor: pointer;">🌓 Toggle Dark Mode</button>
+
+  <!-- Script Includes -->
   <script src="chart.js"></script>
   <script src="jspdf.min.js"></script>
   <script src="script.js"></script>
