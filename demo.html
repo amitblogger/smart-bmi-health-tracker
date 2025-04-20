@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart BMI & Health Tracker – Live Demo</title>
+  <meta name="description" content="Live demo for the Smart BMI & Health Tracker WordPress plugin. Try BMI calculator with charts, dark mode, PDF export, and health tips.">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="icon.png" />
+</head>
+<body>
+
+  <img src="banner.png" alt="Smart BMI & Health Tracker Banner" style="width:100%; margin-bottom: 20px;" />
+
+  <div id="sbmi-container" class="sbmi-wrapper">
+    <h2 class="sbmi-title">Smart BMI & Health Tracker</h2>
+
+    <div class="sbmi-inputs">
+      <label>Gender:
+        <select id="sbmi-gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </label>
+
+      <label>Age:
+        <input type="number" id="sbmi-age" placeholder="e.g. 30" min="1" max="120">
+      </label>
+
+      <label>Height (cm):
+        <input type="number" id="sbmi-height" placeholder="e.g. 170" min="50" max="250">
+      </label>
+
+      <label>Weight (kg):
+        <input type="number" id="sbmi-weight" placeholder="e.g. 70" min="20" max="300">
+      </label>
+
+      <button id="sbmi-calculate">Calculate BMI</button>
+    </div>
+
+    <div class="sbmi-results" style="display: none;">
+      <canvas id="sbmi-chart" width="400" height="200"></canvas>
+      <div id="sbmi-bmi-score"></div>
+      <div id="sbmi-category"></div>
+      <div id="sbmi-tips"></div>
+      <button id="sbmi-pdf-export">Export as PDF</button>
+    </div>
+  </div>
+
+  <script src="chart.js"></script>
+  <script src="jspdf.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
