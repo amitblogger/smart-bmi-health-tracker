@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const calcBtn = document.getElementById("sbmi-calculate").addEventListener("click", () => {
-   // BMI logic here
-});
+  const calcBtn = document.getElementById("sbmi-calculate");
   const gender = document.getElementById("sbmi-gender");
   const age = document.getElementById("sbmi-age");
   const height = document.getElementById("sbmi-height");
@@ -15,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const exportBtn = document.getElementById("sbmi-pdf-export");
   let chartInstance = null;
 
-  // BMI Result Categories
+  // Category logic
   function getBMICategory(bmi) {
     if (bmi < 18.5) return "Underweight";
     else if (bmi < 24.9) return "Normal";
@@ -23,45 +21,42 @@ document.addEventListener("DOMContentLoaded", function () {
     else return "Obese";
   }
 
-  // Tips by Category
-  function getHealthTips(category, genderVal) {
+  function getHealthTips(category) {
     const tips = {
       Underweight: [
-        "Eat calorie-dense nutritious food.",
-        "Include strength training in your routine.",
-        "Track your meals to ensure proper intake.",
-        "Stay consistent with a healthy diet.",
-        "Consult a dietitian for personalized advice."
+        "Increase calorie intake with healthy foods.",
+        "Do resistance training to gain muscle.",
+        "Eat more frequently and snack healthy.",
+        "Track meals using an app.",
+        "Consult a dietitian if needed."
       ],
       Normal: [
-        "Great job! Maintain your healthy habits.",
-        "Continue regular physical activity.",
-        "Stay hydrated and sleep well.",
-        "Get periodic health checkups.",
-        "Avoid junk food to stay within range."
+        "Maintain your diet and activity levels.",
+        "Get regular exercise and sleep well.",
+        "Stay hydrated throughout the day.",
+        "Keep tracking your BMI monthly.",
+        "Avoid junk food to stay in range."
       ],
       Overweight: [
-        "Incorporate daily cardio or brisk walking.",
-        "Cut down on processed and sugary foods.",
-        "Increase fiber intake and hydration.",
-        "Reduce screen time and move more.",
-        "Plan your meals and control portion size."
+        "Cut down on sugary and processed foods.",
+        "Start walking daily for 30 minutes.",
+        "Control portion sizes in each meal.",
+        "Drink more water instead of soft drinks.",
+        "Plan meals ahead to avoid impulsive eating."
       ],
       Obese: [
-        "Seek guidance from a certified dietitian.",
-        "Create a structured weight-loss plan.",
-        "Avoid sedentary lifestyle – move every hour.",
-        "Stay mentally motivated and track progress.",
-        "Monitor blood pressure and sugar regularly."
+        "Follow a structured weight loss plan.",
+        "Work with a doctor or health coach.",
+        "Avoid fast foods and high-fat items.",
+        "Increase physical activity slowly.",
+        "Track progress and stay motivated."
       ]
     };
 
     const selected = tips[category];
-    const randomTips = selected.sort(() => 0.5 - Math.random()).slice(0, 3);
-    return `<ul>${randomTips.map(t => `<li>${t}</li>`).join('')}</ul>`;
+    return `<ul>${selected.map(tip => `<li>${tip}</li>`).join('')}</ul>`;
   }
 
-  // Draw Chart
   function drawChart(bmi) {
     if (chartInstance) chartInstance.destroy();
     chartInstance = new Chart(chartEl, {
@@ -70,7 +65,8 @@ document.addEventListener("DOMContentLoaded", function () {
         labels: ["BMI", "Remaining"],
         datasets: [{
           data: [bmi, 40 - bmi],
-          backgroundColor: ["#00bcd4", "#eeeeee"],
+          backgroundColor: ["#00bcd4", "#e0e0e0"],
+          borderWidth: 1
         }]
       },
       options: {
@@ -84,21 +80,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Calculate BMI
+  // Button click to calculate
   calcBtn.addEventListener("click", () => {
     const h = parseFloat(height.value);
     const w = parseFloat(weight.value);
     const a = parseInt(age.value);
     const g = gender.value;
 
-    if (!h || !w || !a) {
-      alert("Please enter all fields correctly.");
+    if (!h || !w || !a || !g) {
+      alert("Please fill in all fields correctly.");
       return;
     }
 
     const bmi = (w / ((h / 100) ** 2)).toFixed(1);
     const category = getBMICategory(bmi);
-    const tips = getHealthTips(category, g);
+    const tips = getHealthTips(category);
 
     scoreEl.innerHTML = `Your BMI is <strong>${bmi}</strong>`;
     categoryEl.innerHTML = `Category: <strong>${category}</strong>`;
@@ -108,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".sbmi-results").style.display = "block";
   });
 
-  // Export as PDF
+  // Export PDF
   exportBtn.addEventListener("click", () => {
     const doc = new jsPDF();
     doc.setFontSize(16);
@@ -118,30 +114,16 @@ document.addEventListener("DOMContentLoaded", function () {
     doc.text(categoryEl.textContent, 20, 50);
     doc.text("Tips:", 20, 65);
 
-    let tipsText = tipsEl.innerText.split('\n');
-    tipsText.forEach((t, i) => {
-      doc.text(`- ${t}`, 25, 75 + i * 10);
+    const tipsList = tipsEl.innerText.split('\n');
+    tipsList.forEach((line, i) => {
+      doc.text(`- ${line}`, 25, 75 + i * 10);
     });
 
     doc.save("bmi-report.pdf");
   });
 
-  // Add dark/light mode toggle
-  const toggleBtn = document.createElement("button");
-  toggleBtn.textContent = "🌓 Toggle Dark Mode";
-  toggleBtn.style.position = "fixed";
-  toggleBtn.style.top = "15px";
-  toggleBtn.style.right = "15px";
-  toggleBtn.style.zIndex = "9999";
-  toggleBtn.style.padding = "10px 14px";
-  toggleBtn.style.background = "#222";
-  toggleBtn.style.color = "#fff";
-  toggleBtn.style.borderRadius = "20px";
-  toggleBtn.style.border = "none";
-  toggleBtn.style.cursor = "pointer";
-
-  document.body.appendChild(toggleBtn);
-
+  // Toggle dark mode
+  const toggleBtn = document.getElementById("sbmi-dark-toggle");
   toggleBtn.addEventListener("click", () => {
     document.body.classList.toggle("sbmi-dark");
   });
