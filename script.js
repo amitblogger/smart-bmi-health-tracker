@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const calcBtn = document.getElementById("sbmi-calculate");
+  const calcBtn = document.getElementById("sbmi-calculate").addEventListener("click", () => {
+   // BMI logic here
+});
   const gender = document.getElementById("sbmi-gender");
   const age = document.getElementById("sbmi-age");
   const height = document.getElementById("sbmi-height");
