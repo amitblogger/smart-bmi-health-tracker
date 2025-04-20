@@ -1,0 +1,130 @@
+/* =============================
+   Smart BMI & Health Tracker – style.css
+   ============================= */
+
+/* Base Reset */
+#sbmi-container {
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 0 18px rgba(0,0,0,0.1);
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sbmi-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.sbmi-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sbmi-inputs label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.sbmi-inputs input,
+.sbmi-inputs select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+#sbmi-calculate,
+#sbmi-pdf-export {
+  margin-top: 15px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background: linear-gradient(to right, #1cb5e0, #000851);
+  transition: background 0.3s;
+}
+
+#sbmi-calculate:hover,
+#sbmi-pdf-export:hover {
+  background: linear-gradient(to right, #000851, #1cb5e0);
+}
+
+.sbmi-results {
+  margin-top: 25px;
+  text-align: center;
+}
+
+#sbmi-bmi-score {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#sbmi-category {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1cb5e0;
+  margin-bottom: 10px;
+}
+
+#sbmi-tips {
+  font-size: 15px;
+  background: #f0f9ff;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* Chart canvas fix */
+#sbmi-chart {
+  margin: 0 auto 20px;
+  max-width: 100%;
+}
+
+/* Dark Mode Support */
+body.sbmi-dark #sbmi-container {
+  background-color: #1e1e1e;
+  color: #f2f2f2;
+}
+
+body.sbmi-dark #sbmi-category {
+  color: #4fc3f7;
+}
+
+body.sbmi-dark #sbmi-tips {
+  background: #2e2e2e;
+  color: #ddd;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #sbmi-container {
+    padding: 20px;
+  }
+
+  .sbmi-title {
+    font-size: 22px;
+  }
+
+  #sbmi-bmi-score {
+    font-size: 20px;
+  }
+
+  #sbmi-category {
+    font-size: 18px;
+  }
+}
